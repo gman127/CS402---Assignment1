@@ -7,5 +7,7 @@ public class Assignment2 {
 		(new Thread(new MulticastReceiver())).start();
 		
 		(new Thread(new MulticastSender())).start();
+		
+		(new Thread(new Transmitter())).start();
 	}
 }

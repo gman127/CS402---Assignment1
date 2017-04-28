@@ -1,27 +1,30 @@
 package assignment_2;
 
-import java.io.*;
-import java.net.*;
+import java.io.IOException;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.InetAddress;
+import java.util.Scanner;
 
 public class MulticastSender implements Runnable{
-	
+
 	public void run() {
-		
+
 		DatagramSocket socket = null;
 		DatagramPacket outPacket = null;
 		byte[] outBuf;
 		final int PORT = 8888;
 
 		try {
-			
 			socket = new DatagramSocket();
-			long counter = 0;
 			String msg;
 
 			while (true) {
-				
-				msg = "This is multicast! " + counter;
-				counter++;
+				@SuppressWarnings("resource")
+				Scanner scanner = new Scanner(System.in);
+				System.out.println("Enter message to send:");
+				msg = scanner.nextLine();
+
 				outBuf = msg.getBytes();
 
 				//Send to multicast IP address and port
@@ -31,20 +34,10 @@ public class MulticastSender implements Runnable{
 				socket.send(outPacket);
 
 				System.out.println("Server sends : " + msg);
-				try {
-					
-					Thread.sleep(5000);
-					
-				} 
-				catch (InterruptedException ie) {
-				}
 			}
-			
 		} 
 		catch (IOException ioe) {
-			
 			System.out.println(ioe);
-			
 		}
 	}
 }
