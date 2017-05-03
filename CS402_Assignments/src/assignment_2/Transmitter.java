@@ -17,9 +17,9 @@ public class Transmitter implements Runnable {
 		try {
 			socket = new DatagramSocket();
 			String msg;
+			int i = 1;
 
 			while (true) {
-				int i = 1;
 				msg = "Message number " + i + " from other user.";
 				i++;
 				
